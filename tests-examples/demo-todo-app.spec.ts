@@ -11,7 +11,7 @@ const TODO_ITEMS = [
 ] as const;
 
 test.describe('New Todo', () => {
-  test('should allow me to add todo items', async ({ page }) => {
+  test('@smoke - should allow me to add todo items', async ({ page }) => {
     // create a new todo locator
     const newTodo = page.getByPlaceholder('What needs to be done?');
 
@@ -21,7 +21,7 @@ test.describe('New Todo', () => {
 
     // Make sure the list only has one todo item.
     await expect(page.getByTestId('todo-title')).toHaveText([
-      TODO_ITEMS[0]
+      TODO_ITEMS[1] // Internationally changed here to fail the test
     ]);
 
     // Create 2nd todo.
@@ -79,7 +79,7 @@ test.describe('Mark all as completed', () => {
     await checkNumberOfTodosInLocalStorage(page, 3);
   });
 
-  test('should allow me to mark all items as completed', async ({ page }) => {
+  test('@smoke - should allow me to mark all items as completed', async ({ page }) => {
     // Complete all todos.
     await page.getByLabel('Mark all as complete').check();
 
@@ -121,7 +121,7 @@ test.describe('Mark all as completed', () => {
 
 test.describe('Item', () => {
 
-  test('should allow me to mark items as complete', async ({ page }) => {
+  test('@smoke - should allow me to mark items as complete', async ({ page }) => {
     // create a new todo locator
     const newTodo = page.getByPlaceholder('What needs to be done?');
 
@@ -191,7 +191,7 @@ test.describe('Item', () => {
   });
 });
 
-test.describe('Editing', () => {
+test.describe('@smoke - Editing', () => {
   test.beforeEach(async ({ page }) => {
     await createDefaultTodos(page);
     await checkNumberOfTodosInLocalStorage(page, 3);
