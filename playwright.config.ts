@@ -5,7 +5,7 @@ import baseEnvUrl from './utils/environmentBaseUrl';
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// require('dotenv').config(); // import dotenv from 'dotenv';
+require('dotenv').config(); // import dotenv from 'dotenv';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
@@ -13,7 +13,7 @@ import baseEnvUrl from './utils/environmentBaseUrl';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  // testDir: './tests',
 
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -23,17 +23,18 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
 
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  // retries: process.env.CI ? 2 : 0,
+   retries: 2,
 
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 100 : undefined,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   // reporter: [['html', { open: 'always' }]], //always, never and on-failure (default).
   // reporter: [['html', { outputFolder: 'my-report' }]], // report is written into the playwright-report folder in the current working directory. override it using the PLAYWRIGHT_HTML_REPORT
-  // reporter: 'dot',
-  // reporter: 'list',
+  // reporter: 'dot', 'list',
+  // reporter: 'list', 'json',
   /**
     reporter: [
       ['list'],
@@ -57,7 +58,7 @@ export default defineConfig({
     // viewport: { width: 1280, height: 720 },
     // video: 'on-first-retry',
   },
-  // timeout: 30000, //https://playwright.dev/docs/test-timeouts
+    // timeout: 30000, //https://playwright.dev/docs/test-timeouts
     // expect: {
       /**
        * Maximum time expect() should wait for the condition to be met.
